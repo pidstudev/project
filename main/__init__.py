@@ -25,4 +25,9 @@ def create_app(test_config=None):
     def index():
         return 'Index Page'
     
+
+    # Import and call db function from factory
+    from . import db
+    db.init_app(app)
+    
     return app
