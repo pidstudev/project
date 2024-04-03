@@ -2,7 +2,7 @@ import os
 
 from flask import Flask
 
-
+# Factory function
 def create_app(test_config=None):
     
     app = Flask(__name__, instance_relative_config=True)
@@ -21,13 +21,17 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    @app.route('/')
-    def index():
-        return 'Index Page'
+    # @app.route('/')
+    # def index():
+    #     return 'Index Page'
     
 
     # Import and call db function from factory
     from . import db
     db.init_app(app)
+
+    # Import and register blueprint from factory
+    from . import auth
+    app.register_blueprint(auth.bp)
     
     return app

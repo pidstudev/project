@@ -4,6 +4,11 @@ from flask import current_app, g
 
 
 def get_db():
+    """
+    This function is responsible for getting a database connection from the application context ('g').
+    Checks if a database connextion exists in the application context.
+    Otherwise creates a new connection to the SQLite database specified in the app config.
+    """
 
     if 'db' not in g:
         g.db = sqlite3.connect(
@@ -17,6 +22,9 @@ def get_db():
 
 
 def close_db(e=None):
+    """
+    Closes the database connection stored in the application context ('g') if it exists.
+    """
 
     db = g.pop('db', None)
 
@@ -25,6 +33,9 @@ def close_db(e=None):
 
 
 def init_db():
+    """
+    Initializes the database by executing the SQL commands defined in schema.sql
+    """
 
     db = get_db()
 
@@ -34,12 +45,15 @@ def init_db():
 
 @click.command('init-db')
 def init_db_command():
-    """Clear the existing data and create new tables."""
+    """
+    Creates a CLI command 'init-db' that clears existing data and creates new tables in the db.
+    """
 
     init_db()
     click.echo('Database initialized.')
 
 
 def init_app(app):
+    
     app.teardown_appcontext(close_db)
     app.cli.add_command(init_db_command)
