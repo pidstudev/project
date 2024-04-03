@@ -107,3 +107,19 @@ def logout():
 
     session.clear
     return redirect(url_for('index'))
+
+
+# Require authentication in other views
+def login_required(view):
+    @functools.wraps(view)
+    def wrapped_view(**kwargs):
+        """
+        Checks if a user is loaded and redirects to the login page otherwise. If a user is loaded the original view is called and continues normally.
+        """
+
+        if g.user is None:
+            return redirect(url_for('auth.login'))
+        
+        return view(**kwargs)
+    
+    return wrapped_view
