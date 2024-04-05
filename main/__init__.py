@@ -33,5 +33,9 @@ def create_app(test_config=None):
     # Import and register blueprint from factory
     from . import auth
     app.register_blueprint(auth.bp)
+
+    # Import and register van_manager blueprint
+    from . import van_manager
+    app.register_blueprint(van_manager.bp)
     
     return app

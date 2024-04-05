@@ -20,6 +20,10 @@ def register():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        confirm_password = request.form['confirm_password']
+        email = request.form['email']
+        phone_number = request.form.get('phone_number')
+
         db = get_db()
         error = None
 
@@ -27,19 +31,26 @@ def register():
             error = 'Username is required.'
         elif not password:
             error = 'Password is required.'
+        elif password != confirm_password:
+            error = 'Passwords do not match.'
+        elif not email:
+            error = 'Email is required.'
+        
 
         if error is None:
 
             try:
                 hashed_password = generate_password_hash(password)
                 db.execute(
-                    "INSERT INTO user (username, password) VALUES (?, ?)",
-                    (username, hashed_password),
+                    "INSERT INTO user (username, password, email, phone_number) VALUES (?, ?, ?, ?)",
+                    (username, hashed_password, email, phone_number),
                 )
                 db.commit()
+                return redirect(url_for("auth.login"))
 
-            except db.IntegrityError:
+            except db.IntegrityError as e:
                 error = f"User {username} is already registered or taken."
+                # error = f"An error occured: {str(e)}"
             
             else:
                 return redirect(url_for("auth.login"))
@@ -105,7 +116,7 @@ def logout():
     Clears the session upon user logout and redirects to the index page.
     """
 
-    session.clear
+    session.clear()
     return redirect(url_for('index'))
 
 

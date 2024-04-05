@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Rentals{% endblock %}
+
+{% block header %}
+<h1>Rentals</h1>
+{% endblock %}
+
+{% block content %}
+<p>Welcome to the Rentals page.</p>
+<p>List of rentals:</p>
+<ul>
+    {% for rental in rentals %}
+    <li>{{ rental.id }} - {{ rental.rental_date_from }} to {{ rental.rental_date_to }} - {{ rental.destination }} ({{
+        rental.agreed_price }})</li>
+    {% endfor %}
+</ul>
+<a href="{{ url_for('van_manager.add_rental') }}">Add Rental</a>
+{% endblock %}
