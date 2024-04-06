@@ -12,16 +12,6 @@ CREATE TABLE user (
     phone_number TEXT NOT NULL
 );
 
--- Create table for blog posts
-CREATE TABLE post(
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    author_id INTEGER NOT NULL,
-    created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    title TEXT NOT NULL,
-    body TEXT NOT NULL,
-    FOREIGN KEY (author_id) REFERENCES user (id)
-);
-
 -- Create table for van rental manager app
 CREATE TABLE van_manager_app (
     id INTEGER PRIMARY KEY AUTOINCREMENT,

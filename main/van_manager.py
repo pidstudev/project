@@ -14,7 +14,7 @@ def index():
     db = get_db()
     rentals = db.execute(
         'SELECT * FROM van_manager_app WHERE user_id = ? ORDER BY created DESC',
-        (g.user['id'])
+        (g.user['id'],)
     ).fetchall()
 
     return render_template('van_manager/rentals.html', rentals=rentals)
@@ -114,5 +114,5 @@ def delete_rental(id):
         db.execute('DELETE FROM van_manager_app WHERE id = ?', (id,))
         db.commit()
         flash('Rental deleted successfully', 'success')
-        
+
     return redirect(url_for('van_manager.index'))

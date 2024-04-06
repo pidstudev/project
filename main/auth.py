@@ -86,7 +86,7 @@ def login():
         if error is None:
             session.clear()
             session['user_id'] = user['id']
-            return redirect(url_for('index'))
+            return redirect(url_for('van_manager.index'))
 
         flash(error)
 
@@ -117,7 +117,7 @@ def logout():
     """
 
     session.clear()
-    return redirect(url_for('index'))
+    return redirect(url_for('auth.login'))
 
 
 # Require authentication in other views
