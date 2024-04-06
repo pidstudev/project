@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Welcome to Your App{% endblock %}
+
+{% block header %}
+    <h1>Welcome to Your App</h1>
+{% endblock %}
+
+{% block content %}
+    <p>This is a description of your application.</p>
+    <p>Sign up or log in to get started:</p>
+    <a href="{{ url_for('auth.register') }}" class="btn btn-primary">Register</a>
+    <a href="{{ url_for('auth.login') }}" class="btn btn-secondary">Log In</a>
+{% endblock %}

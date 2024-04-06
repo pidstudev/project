@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask
+from flask import Flask, render_template
 
 # Factory function
 def create_app(test_config=None):
@@ -21,9 +21,10 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    # @app.route('/')
-    # def index():
-    #     return 'Index Page'
+    @app.route('/')
+    def index():
+        """Render the landing page"""
+        return render_template('index.html')
     
 
     # Import and call db function from factory
