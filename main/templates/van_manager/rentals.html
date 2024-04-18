@@ -11,8 +11,14 @@
 <p>List of rentals:</p>
 <ul>
     {% for rental in rentals %}
-    <li>{{ rental.id }} - {{ rental.rental_date_from }} to {{ rental.rental_date_to }} - {{ rental.destination }} ({{
-        rental.agreed_price }})</li>
+    <li>
+        {{ rental.id }} - {{ rental.rental_date_from }} to {{ rental.rental_date_to }} - {{ rental.destination }} ({{ rental.agreed_price }})
+        [<a href="{{ url_for('van_manager.update_rental', id=rental.id) }}">Update</a>]
+        [<form action="{{ url_for('van_manager.delete_rental', id=rental.id) }}" method="post" style="display:inline">
+            <input type="hidden" name="_method" value="DELETE">
+            <button type="submit">Delete</button>
+        </form>]
+    </li>
     {% endfor %}
 </ul>
 <a href="{{ url_for('van_manager.add_rental') }}">Add Rental</a>
