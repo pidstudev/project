@@ -3,6 +3,9 @@ import os
 from flask import Flask, render_template
 from flask_mail import Mail
 
+from dotenv import load_dotenv
+
+load_dotenv()
 mail = Mail()
 
 # Factory function
@@ -16,8 +19,8 @@ def create_app(test_config=None):
         MAIL_SERVER='smtp.gmail.com',
         MAIL_PORT=587,
         MAIL_USE_TLS=True,
-        MAIL_USERNAME='lakbayph.travelandtour@gmail.com',
-        MAIL_PASSWORD='hewwzxkjulfdlycj'
+        MAIL_USERNAME=os.getenv('MAIL_USERNAME'),
+        MAIL_PASSWORD=os.getenv('MAIL_PASSWORD')
     )
 
     if test_config is None:
