@@ -1,14 +1,22 @@
 {% extends 'base.html' %}
 
-{% block title %}Welcome to Your App{% endblock %}
+{% block title %}Van Manager App{% endblock %}
 
 {% block header %}
-    <h1>Welcome to Your App</h1>
+    <h1>LakbayPinas Van Rental Manager</h1>
 {% endblock %}
 
 {% block content %}
-    <p>This is a description of your application.</p>
-    <p>Sign up or log in to get started:</p>
-    <a href="{{ url_for('auth.register') }}" class="btn btn-primary">Register</a>
-    <a href="{{ url_for('auth.login') }}" class="btn btn-secondary">Log In</a>
+
+    <p>Welcome to LakbayPinas Van Rental Services! Our app helps van drivers and operators manage their rentals efficiently. Easily track travel details, client information, rental prices, and more. Sign up now to streamline your van rental business!</p>
+
+    {% if not g.user %}
+        <p>Sign up or log in to get started:</p>
+        <a href="{{ url_for('auth.register') }}" class="btn btn-primary">Register</a>
+        <a href="{{ url_for('auth.login') }}" class="btn btn-secondary">Log In</a>
+    {% else %}
+        <p>Welcome, {{ g.user['username'] }}!</p>
+        <p><a href="{{ url_for('van_manager.index') }}">Rental Manager</a></p>
+    {% endif %}
+
 {% endblock %}
