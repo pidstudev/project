@@ -1,6 +1,9 @@
 import os
 
 from flask import Flask, render_template
+from flask_mail import Mail
+
+mail = Mail()
 
 # Factory function
 def create_app(test_config=None):
@@ -9,6 +12,12 @@ def create_app(test_config=None):
     app.config.from_mapping(
         SECRET_KEY='dev',
         DATABASE=os.path.join(app.instance_path, 'main.sqlite'),
+        # Configure Flask-Mail
+        MAIL_SERVER='smtp.gmail.com',
+        MAIL_PORT=587,
+        MAIL_USE_TLS=True,
+        MAIL_USERNAME='lakbayph.travelandtour@gmail.com',
+        MAIL_PASSWORD='hewwzxkjulfdlycj'
     )
 
     if test_config is None:

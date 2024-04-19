@@ -4,6 +4,8 @@ from flask import (
 )
 from werkzeug.security import check_password_hash, generate_password_hash
 from main.db import get_db
+from main.email_notifications import send_email_notification
+from datetime import datetime, timedelta
 
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
@@ -46,6 +48,11 @@ def register():
                     (username, hashed_password, email, phone_number),
                 )
                 db.commit()
+
+                # Schedule email notification
+                tomorrow = datetime.now() + timedelta(days=1)
+                send_email_notification(email, 'Van Rental Notification', f'Your van rental is scheduled for {tomorrow}. Please prepare accordingly.')
+                
                 return redirect(url_for("auth.login"))
 
             except db.IntegrityError as e:

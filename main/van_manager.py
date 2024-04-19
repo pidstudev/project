@@ -1,6 +1,8 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, request, g
 from .db import get_db
 from .auth import login_required
+from main.email_notifications import send_email_notification
+from datetime import datetime, timedelta
 
 
 bp = Blueprint('van_manager', __name__, url_prefix='/van')
@@ -46,6 +48,11 @@ def add_rental():
         )
 
         db.commit()
+
+        # Schedule email notification
+        tomorrow = datetime.now() + timedelta(days=1)
+        send_email_notification(g.user['email'], 'Van Rental Notification', f'Your van rental is scheduled for {tomorrow}. Please prepare accordingly.')
+
         flash('Rental added successfully', 'success')
 
         return redirect(url_for('van_manager.index'))

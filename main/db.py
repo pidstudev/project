@@ -1,6 +1,8 @@
 import sqlite3
 import click
 from flask import current_app, g
+from main.email_notifications import send_email_notification
+from datetime import datetime, timedelta
 
 
 def get_db():
@@ -42,6 +44,16 @@ def init_db():
     with current_app.open_resource('schema.sql') as f:
         db.executescript(f.read().decode('utf8'))
 
+    # Schedule email notifications
+    tomorrow = datetime.now() + timedelta(days=1)
+    rentals = db.execute(
+        "SELECT * FROM rentals WHERE email_notification_time = ?",
+        (tomorrow,)
+    ).fetchall()
+
+    for rental in rentals:
+        send_email_notification(rental['email'], 'Van Rental Notification', f'Your van rental is scheduled for {tomorrow}. Please prepare accordingly.')
+
 
 @click.command('init-db')
 def init_db_command():
@@ -54,6 +66,6 @@ def init_db_command():
 
 
 def init_app(app):
-    
+
     app.teardown_appcontext(close_db)
     app.cli.add_command(init_db_command)
