@@ -1,0 +1,23 @@
+
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 100px; /* Height of the footer */
+    padding-bottom: 100px; /* Height of the footer */
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100px; /* Adjust height as needed */
+    background-color: #f8f9fa; /* Change to your preferred background color */
+    color: #212529; /* Change to your preferred text color */
+    border-top: 1px solid #dee2e6; /* Change to your preferred border color */
+    text-align: center; /* Center the text horizontally */
+    line-height: 100px; /* Center the text vertically */
+}
