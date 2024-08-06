@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block navbar %}
-    {# Exclude navbar from index page #}
+{# Exclude navbar from index page #}
 {% endblock %}
 
 {% block title %}Van Manager App{% endblock %}
@@ -10,16 +10,20 @@
 
 <div class="container col-xxl-8 px-4 py-5">
     <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+
         <div class="col-10 col-sm-8 col-lg-6">
             <img src="../static/images/lakbaypinaslogo-01.png" class="d-block mx-lg-auto img-fluid"
                 alt="LakbayPinas Logo" width="700" height="500" loading="lazy">
         </div>
+
         <div class="col-lg-6">
+
             <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Welcome to LakbayPinas Van Rental Services!</h1>
             <p class="lead"> Our app helps van drivers and operators manage their rentals efficiently.
                 Easily track travel details, client information, rental prices, and more. Sign up now to streamline your
                 van rental
                 business!</p>
+
             <div class="d-grid gap-2 d-md-flex justify-content-md-start">
                 {% if not g.user %}
                 <a href="{{ url_for('auth.register') }}" class="btn btn-primary btn-lg px-4 me-md-2">Register</a>
@@ -29,8 +33,11 @@
                 <p><a href="{{ url_for('van_manager.index') }}">Rental Manager</a></p>
                 {% endif %}
             </div>
+
         </div>
+
     </div>
+
 </div>
 
 {% endblock %}

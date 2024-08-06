@@ -1,30 +1,37 @@
 {% extends 'base.html' %}
 
-{% block header %}
-    <h1>{% block title %}Register{% endblock %}</h1>
+{% block navbar %}
+{# Exclude navbar from index page #}
 {% endblock %}
 
+{% block title %}Register{% endblock %}
+
 {% block content %}
-
-    <form method="post">
-
-        <label for="username">Username</label>
-        <input name="username" id="username">
-
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password">
-
-        <label for="confirm_password">Confirm Password</label>
-        <input type="password" name="confirm_password" id="confirm_password">
-
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email">
-
-        <label for="phone_number">Mobile Number (optional)</label>
-        <input type="text" id="phone_number" name="phone_number">
-
-        <input type="submit" value="Register">
-
-    </form>
-
+<div class="container col-xl-10 col-xxl-8 px-4 py-5">
+    <div class="row align-items-center g-lg-5 py-5">
+        <div class="col-lg-7 text-center text-lg-start">
+            <h1 class="display-4 fw-bold lh-1 text-body-emphasis mb-3">Register</h1>
+            <p class="col-lg-10 fs-4">Please fill in the form to create an account.</p>
+        </div>
+        <div class="col-md-10 mx-auto col-lg-5">
+            <form method="post" class="p-4 p-md-5 border rounded-3 bg-body-tertiary">
+                <div class="form-floating mb-3">
+                    <input type="text" name="username" id="username" class="form-control" placeholder="Username" required>
+                    <label for="username">Username</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
+                    <label for="password">Password</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="email" name="email" id="email" class="form-control" placeholder="name@example.com" required>
+                    <label for="email">Email address</label>
+                </div>
+                <button class="w-100 btn btn-lg btn-primary" type="submit">Register</button>
+                <hr class="my-4">
+                <small class="text-body-secondary">Already a User? <a href="{{ url_for('auth.login') }}">Log In</a></small>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}
