@@ -1,15 +1,13 @@
 import functools
 from flask import (
-    Blueprint , flash, g, redirect, render_template, request, session, url_for
+    Blueprint, flash, g, redirect, render_template, request, session, url_for
 )
 from werkzeug.security import check_password_hash, generate_password_hash
 from main.db import get_db
 from main.email_notifications import send_email_notification
 from datetime import datetime, timedelta
 
-
 bp = Blueprint('auth', __name__, url_prefix='/auth')
-
 
 # ---------- REGISTER VIEW ----------
 @bp.route('/register', methods=('GET', 'POST'))
@@ -37,10 +35,8 @@ def register():
             error = 'Passwords do not match.'
         elif not email:
             error = 'Email is required.'
-        
 
         if error is None:
-
             try:
                 hashed_password = generate_password_hash(password)
                 db.execute(
@@ -49,23 +45,18 @@ def register():
                 )
                 db.commit()
 
-                # Schedule email notification
-                tomorrow = datetime.now() + timedelta(days=1)
-                send_email_notification(email, 'Van Rental Notification', f'Your van rental is scheduled for {tomorrow}. Please prepare accordingly.')
+                # Schedule welcome email notification
+                send_email_notification(email, 'Welcome to Van Rental Manager!', 
+                    f'Hello {username},\n\nThank you for registering with Van Rental Manager. We are excited to have you onboard!\n\nBest regards,\nLakbayPinas')
                 
                 return redirect(url_for("auth.login"))
 
             except db.IntegrityError as e:
                 error = f"User {username} is already registered or taken."
-                # error = f"An error occured: {str(e)}"
-            
-            else:
-                return redirect(url_for("auth.login"))
             
         flash(error)
 
     return render_template('auth/register.html')
-
 
 # ---------- LOGIN VIEW ----------
 @bp.route('/login', methods=('GET', 'POST'))
@@ -93,12 +84,16 @@ def login():
         if error is None:
             session.clear()
             session['user_id'] = user['id']
+            
+            # Optionally, send a login notification email
+            send_email_notification(user['email'], 'Login Notification', 
+                'Hello,\n\nYou have successfully logged in to your Van Rental Manager account.\n\nBest regards,\nLakbayPinas')
+            
             return redirect(url_for('van_manager.index'))
 
         flash(error)
 
     return render_template('auth/login.html')
-
 
 @bp.before_app_request
 def load_logged_in_user():
@@ -116,16 +111,14 @@ def load_logged_in_user():
             'SELECT * FROM user WHERE id = ?', (user_id,)
         ).fetchone()
 
-
 @bp.route('/logout')
 def logout():
     """
-    Clears the session upon user logout and redirects to the index page.
+    Clears the session upon user logout and redirects to the login page.
     """
 
     session.clear()
     return redirect(url_for('auth.login'))
-
 
 # Require authentication in other views
 def login_required(view):

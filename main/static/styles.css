@@ -1,13 +1,37 @@
-
-
-html {
-    position: relative;
-    min-height: 100%;
-}
-
 body {
-    margin-bottom: 100px; /* Height of the footer */
-    padding-bottom: 100px; /* Height of the footer */
+    background-color: #f8f9fa;
 }
 
+.navbar {
+    margin-bottom: 20px;
+}
 
+.navbar-brand {
+    font-size: 1.5rem;
+}
+
+.navbar-nav .nav-link {
+    padding-right: 1.5rem;
+}
+
+.flash {
+    margin: 20px;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.flash.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.flash.error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+footer {
+    margin-top: 20px;
+    padding: 10px;
+    text-align: center;
+}

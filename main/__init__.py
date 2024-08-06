@@ -20,8 +20,10 @@ def create_app(test_config=None):
         MAIL_SERVER='smtp.gmail.com',
         MAIL_PORT=587,
         MAIL_USE_TLS=True,
+        MAIL_USE_SSL=False,
         MAIL_USERNAME=os.getenv('MAIL_USERNAME'),
-        MAIL_PASSWORD=os.getenv('MAIL_PASSWORD')
+        MAIL_PASSWORD=os.getenv('MAIL_PASSWORD'),
+        MAIL_DEFAULT_SENDER=os.getenv('MAIL_USERNAME')
     )
 
     if test_config is None:
@@ -38,7 +40,6 @@ def create_app(test_config=None):
     def index():
         """Render the landing page"""
         return render_template('index.html')
-    
 
     # Import and call db function from factory
     from . import db
@@ -51,5 +52,8 @@ def create_app(test_config=None):
     # Import and register van_manager blueprint
     from . import van_manager
     app.register_blueprint(van_manager.bp)
+
+    # Initialize Flask-Mail
+    mail.init_app(app)
     
     return app
