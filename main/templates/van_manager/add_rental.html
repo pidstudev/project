@@ -2,24 +2,42 @@
 
 {% block title %}Add Rental{% endblock %}
 
-{% block header %}
-<h1>Add Rental</h1>
-{% endblock %}
-
 {% block content %}
-<form method="post">
-    <label for="rental_date_from">Rental Date From:</label>
-    <input type="datetime-local" id="rental_date_from" name="rental_date_from" required><br><br>
-    <label for="rental_date_to">Rental Date To:</label>
-    <input type="datetime-local" id="rental_date_to" name="rental_date_to" required><br><br>
-    <label for="client_contact">Client Contact:</label>
-    <input type="text" id="client_contact" name="client_contact" required><br><br>
-    <label for="pickup_location">Pickup Location:</label>
-    <input type="text" id="pickup_location" name="pickup_location" required><br><br>
-    <label for="destination">Destination:</label>
-    <input type="text" id="destination" name="destination" required><br><br>
-    <label for="agreed_price">Agreed Price:</label>
-    <input type="number" id="agreed_price" name="agreed_price" step="0.01" required><br><br>
-    <button type="submit">Add Rental</button>
-</form>
+<div class="container col-xl-10 col-xxl-8 px-4 py-5">
+    <div class="row align-items-center g-lg-5 py-5">
+        <div class="col-lg-7 text-center text-lg-start">
+            <h1 class="display-4 fw-bold lh-1 text-body-emphasis mb-3">Add Rental</h1>
+            <p class="col-lg-10 fs-4">Fill out the form below to add a new rental.</p>
+        </div>
+        <div class="col-md-10 mx-auto col-lg-10">
+            <form method="post" class="p-4 p-md-5 border rounded-3 bg-body-tertiary">
+                <div class="mb-3">
+                    <label for="rental_date_from" class="form-label">Rental Date From:</label>
+                    <input type="datetime-local" id="rental_date_from" name="rental_date_from" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="rental_date_to" class="form-label">Rental Date To:</label>
+                    <input type="datetime-local" id="rental_date_to" name="rental_date_to" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="client_contact" class="form-label">Client Contact:</label>
+                    <input type="text" id="client_contact" name="client_contact" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="pickup_location" class="form-label">Pickup Location:</label>
+                    <input type="text" id="pickup_location" name="pickup_location" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="destination" class="form-label">Destination:</label>
+                    <input type="text" id="destination" name="destination" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="agreed_price" class="form-label">Agreed Price:</label>
+                    <input type="number" id="agreed_price" name="agreed_price" class="form-control" step="0.01" required>
+                </div>
+                <button type="submit" class="w-100 btn btn-lg btn-success">Add Rental</button>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}

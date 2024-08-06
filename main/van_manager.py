@@ -84,7 +84,7 @@ def update_rental(id):
             client_contact = ?,
             pickup_location = ?,
             destination = ?,
-            agreed_price = ?,
+            agreed_price = ?
             WHERE id = ?
             """,
             (
