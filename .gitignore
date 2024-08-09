@@ -23,3 +23,34 @@ build/
 
 .env/
 .env
+
+van-rental-manager/.env
+
+
+
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual Environment
+.venv/
+
+# Flask instance folder
+instance/
+
+# Environment variables
+.env
+
+# Flask mail logs (if any)
+mail.log
+
+# Other files and directories
+.pytest_cache/
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/
