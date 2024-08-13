@@ -52,21 +52,26 @@ To set up the Van Rental Manager locally, follow these steps:
    cd van-rental-manager
 
 2. **Create a Virtual Environment**:
-  python3 -m venv venv
-  source venv/bin/activate
+    ```bash
+    python3 -m venv venv
+    source venv/bin/activate
 
 3. **Install Dependencies**:
-  pip install -r requirements.txt
+    ```bash
+    pip install -r requirements.txt
 
 4. **Initialize the Database**:
-  flask init-db
+    ```bash
+    flask init-db
 
 5. **Set Environment Variables**:
-  export FLASK_APP=van_manager
-  export FLASK_ENV=development
+    ```bash
+    export FLASK_APP=van_manager
+    export FLASK_ENV=development
 
 6. **Run the Application**:
-  flask run
+    ```bash
+    flask run
 
 7. **Access the Application**
   Open your browser and go to 'http://127.0.0.1:5000'
