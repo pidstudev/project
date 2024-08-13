@@ -42,7 +42,37 @@ The Van Rental Manager is a web application designed to help users manage their 
     - **`update_rental.html`**: Template for updating an existing rental entry.
 - **`static/`**: Directory containing static assets such as CSS files.
 
-## Design Choices
+## Setup Instructions
+
+To set up the Van Rental Manager locally, follow these steps:
+
+1. **Clone the Repository**: 
+   ```bash
+   git clone https://github.com/yourusername/van-rental-manager.git
+   cd van-rental-manager
+
+2. **Create a Virtual Environment**:
+  python3 -m venv venv
+  source venv/bin/activate
+
+3. **Install Dependencies**:
+  pip install -r requirements.txt
+
+4. **Initialize the Database**:
+  flask init-db
+
+5. **Set Environment Variables**:
+  export FLASK_APP=van_manager
+  export FLASK_ENV=development
+
+6. **Run the Application**:
+  flask run
+
+7. **Access the Application**
+  Open your browser and go to 'http://127.0.0.1:5000'
+
+
+  ## Design Choices
 
 - **Flask Framework**: Flask was chosen for its simplicity and flexibility, allowing for rapid development of web applications.
 - **SQLite Database**: SQLite was chosen as the database management system for its ease of use and suitability for small-scale applications.
