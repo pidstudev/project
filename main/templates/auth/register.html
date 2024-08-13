@@ -15,6 +15,13 @@
             <p class="col-lg-10 fs-4">Please fill in the form to create an account.</p>
         </div>
         <div class="col-md-10 mx-auto col-lg-5">
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <div class="alert alert-danger" role="alert">
+                  {{ messages[0] }}
+                </div>
+              {% endif %}
+            {% endwith %}
             <form method="post" class="p-4 p-md-5 border rounded-3 bg-body-tertiary">
                 <div class="form-floating mb-3">
                     <input type="text" name="username" id="username" class="form-control" placeholder="Username" required>
@@ -25,9 +32,17 @@
                     <label for="password">Password</label>
                 </div>
                 <div class="form-floating mb-3">
+                    <input type="password" name="confirm_password" id="confirm_password" class="form-control" placeholder="Confirm Password" required>
+                    <label for="confirm_password">Confirm Password</label>
+                </div>
+                <div class="form-floating mb-3">
                     <input type="email" name="email" id="email" class="form-control" placeholder="name@example.com" required>
                     <label for="email">Email address</label>
                 </div>
+                <!-- <div class="form-floating mb-3">
+                    <input type="text" name="phone_number" id="phone_number" class="form-control" placeholder="Phone Number">
+                    <label for="phone_number">Phone Number</label>
+                </div> -->
                 <button class="w-100 btn btn-lg btn-primary" type="submit">Register</button>
                 <hr class="my-4">
                 <small class="text-body-secondary">Already a User? <a href="{{ url_for('auth.login') }}">Log In</a></small>
